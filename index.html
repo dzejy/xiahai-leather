@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夏海皮革 - TPU / PU / PVC 高品质皮革材料</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--surface:#141414;--surface2:#1e1e1e;--border:#2a2a2a;
+  --text:#f0f0f0;--text2:#999;--accent:#c9a96e;--accent2:#e8c98a;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
+nav.scrolled{background:rgba(10,10,10,.95);box-shadow:0 4px 30px rgba(0,0,0,.5)}
+.logo{font-size:22px;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.logo span{font-weight:300;color:var(--text2);font-size:14px;margin-left:8px;letter-spacing:1px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;letter-spacing:1px;transition:color .3s;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.mobile-toggle span{width:24px;height:2px;background:var(--text);transition:all .3s}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0a0a0a 100%);z-index:0}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,169,110,.08) 0%,transparent 70%);z-index:1}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:clamp(36px,6vw,72px);font-weight:200;letter-spacing:8px;margin-bottom:16px;line-height:1.2}
+.hero h1 strong{font-weight:700;color:var(--accent)}
+.hero p{font-size:clamp(14px,2vw,18px);color:var(--text2);letter-spacing:4px;margin-bottom:48px;font-weight:300}
+.hero-btn{display:inline-block;padding:16px 48px;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-size:14px;letter-spacing:3px;transition:all .4s;position:relative;overflow:hidden}
+.hero-btn::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(100%);transition:transform .4s;z-index:-1}
+.hero-btn:hover{color:var(--bg)}.hero-btn:hover::before{transform:translateY(0)}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text2);font-size:12px;letter-spacing:2px;animation:bounce 2s infinite}
+.scroll-hint::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent)}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* FLOATING PATTERNS */
+.hero-patterns{position:absolute;inset:0;z-index:1;overflow:hidden;opacity:.15}
+.hero-patterns div{position:absolute;border:1px solid var(--accent);border-radius:50%;animation:float 20s infinite linear}
+.hero-patterns div:nth-child(1){width:300px;height:300px;top:-50px;right:-50px;animation-duration:25s}
+.hero-patterns div:nth-child(2){width:200px;height:200px;bottom:10%;left:-30px;animation-duration:20s;animation-delay:-5s}
+.hero-patterns div:nth-child(3){width:150px;height:150px;top:30%;right:20%;animation-duration:30s;animation-delay:-10s}
+@keyframes float{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.1)}100%{transform:rotate(360deg) scale(1)}}
+
+/* STATS BAR */
+.stats{padding:60px 40px;display:flex;justify-content:center;gap:80px;border-bottom:1px solid var(--border)}
+.stat{text-align:center}
+.stat-num{font-size:48px;font-weight:200;color:var(--accent);line-height:1}
+.stat-label{font-size:13px;color:var(--text2);letter-spacing:2px;margin-top:8px}
+
+/* SECTION COMMON */
+section{padding:100px 40px}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title h2{font-size:clamp(24px,4vw,40px);font-weight:200;letter-spacing:4px;margin-bottom:12px}
+.section-title h2 strong{font-weight:700;color:var(--accent)}
+.section-title p{color:var(--text2);font-size:14px;letter-spacing:2px}
+
+/* CATEGORY TABS */
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:50px;flex-wrap:wrap}
+.tab{padding:12px 32px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:14px;letter-spacing:2px;cursor:pointer;transition:all .3s;font-family:inherit}
+.tab:hover{border-color:var(--accent);color:var(--text)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+
+/* PRODUCT GRID */
+.products-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.product-card{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:all .4s}
+.product-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s,filter .6s}
+.product-card:hover img{transform:scale(1.08);filter:brightness(1.1)}
+.product-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%);opacity:0;transition:opacity .4s}
+.product-card:hover::after{opacity:1}
+.product-info{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:2;transform:translateY(10px);opacity:0;transition:all .4s}
+.product-card:hover .product-info{transform:translateY(0);opacity:1}
+.product-name{font-size:16px;font-weight:600;letter-spacing:1px;margin-bottom:4px}
+.product-count{font-size:12px;color:var(--accent);letter-spacing:1px}
+.product-badge{position:absolute;top:16px;left:16px;z-index:3;padding:8px 20px;font-size:16px;letter-spacing:3px;font-weight:900;border-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,.6);text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.badge-tpu{background:linear-gradient(135deg,#d4a437,#f0d060);color:#1a1000}
+.badge-pu{background:linear-gradient(135deg,#2ea870,#45e0a0);color:#001a0d}
+.badge-pvc{background:linear-gradient(135deg,#d03070,#f060a0);color:#fff}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.95);backdrop-filter:blur(20px)}
+.lightbox.active{display:flex;flex-direction:column}
+.lb-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border)}
+.lb-title{font-size:18px;font-weight:600;letter-spacing:1px}
+.lb-close{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border);color:var(--text);font-size:24px;cursor:pointer;transition:all .3s}
+.lb-close:hover{border-color:var(--accent);color:var(--accent)}
+.lb-body{flex:1;display:flex;overflow:hidden;position:relative}
+.lb-main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-width:0}
+.lb-main img{max-width:90%;max-height:85vh;object-fit:contain;transition:opacity .3s}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);border:1px solid var(--border);color:var(--text);font-size:20px;cursor:pointer;transition:all .3s;z-index:5}
+.lb-arrow:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.lb-prev{left:20px}.lb-next{right:20px}
+.lb-thumbs{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;overflow-x:auto;flex-shrink:0}
+.lb-thumbs::-webkit-scrollbar{height:4px}.lb-thumbs::-webkit-scrollbar-track{background:var(--surface)}.lb-thumbs::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+.lb-thumb{width:64px;height:64px;flex-shrink:0;cursor:pointer;border:2px solid transparent;transition:all .3s;opacity:.5}
+.lb-thumb:hover{opacity:.8}.lb-thumb.active{border-color:var(--accent);opacity:1}
+.lb-thumb img{width:100%;height:100%;object-fit:cover}
+.lb-counter{color:var(--text2);font-size:13px}
+
+/* ABOUT */
+.about{background:var(--surface)}
+.about-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-text p{color:var(--text2);line-height:2;font-size:15px;margin-bottom:20px}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.feature{padding:24px;border:1px solid var(--border);transition:border-color .3s}
+.feature:hover{border-color:var(--accent)}
+.feature h4{font-size:14px;letter-spacing:1px;margin-bottom:8px;color:var(--accent)}
+.feature p{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* CONTACT */
+.contact{text-align:center}
+.contact-cards{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.contact-card{padding:40px 24px;border:1px solid var(--border);transition:all .4s}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.contact-icon{font-size:28px;margin-bottom:16px}
+.contact-label{font-size:12px;color:var(--text2);letter-spacing:2px;margin-bottom:8px}
+.contact-value{font-size:16px;font-weight:600;letter-spacing:1px;word-break:break-all}
+
+/* FOOTER */
+footer{padding:40px;text-align:center;border-top:1px solid var(--border)}
+footer p{color:var(--text2);font-size:13px;letter-spacing:1px}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{position:fixed;top:64px;left:0;right:0;background:rgba(10,10,10,.98);flex-direction:column;align-items:center;padding:24px;gap:20px;transform:translateY(-100%);transition:transform .3s;border-bottom:1px solid var(--border)}
+  .nav-links.open{transform:translateY(0)}
+  .mobile-toggle{display:flex}
+  .stats{gap:30px;padding:40px 20px;flex-wrap:wrap}
+  .stat-num{font-size:32px}
+  section{padding:60px 16px}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .about-grid{grid-template-columns:1fr;gap:30px}
+  .about-features{grid-template-columns:1fr}
+  .contact-cards{grid-template-columns:1fr;max-width:400px}
+  .lb-arrow{width:36px;height:36px;font-size:16px}
+  .lb-prev{left:8px}.lb-next{right:8px}
+  .tabs{gap:4px}
+  .tab{padding:8px 16px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">XIA HAI<span>LEATHER</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#hero">首页</a>
+    <a href="#products">产品中心</a>
+    <a href="#about">关于我们</a>
+    <a href="#contact">联系我们</a>
+  </div>
+  <div class="mobile-toggle" id="mobileToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-patterns"><div></div><div></div><div></div></div>
+  <div class="hero-content">
+    <h1>探索<strong>质感</strong>之美</h1>
+    <p>TPU &middot; PU &middot; PVC 高品质皮革材料供应商</p>
+    <a href="#products" class="hero-btn">浏览产品</a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<div class="stats">
+  <div class="stat fade-in"><div class="stat-num" data-count="45">0</div><div class="stat-label">产品系列</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-count="700">0</div><div class="stat-label">花色样品</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-count="3">0</div><div class="stat-label">材质大类</div></div>
+</div>
+
+<section id="products">
+  <div class="section-title fade-in">
+    <h2>产品<strong>中心</strong></h2>
+    <p>丰富纹路 &middot; 多彩配色 &middot; 品质保障</p>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-cat="all">全部产品</button>
+    <button class="tab" data-cat="tpu">TPU 系列</button>
+    <button class="tab" data-cat="pu">PU 系列</button>
+    <button class="tab" data-cat="pvc">PVC 系列</button>
+  </div>
+  <div class="products-grid" id="grid"></div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-title fade-in">
+    <h2>关于<strong>我们</strong></h2>
+    <p>专注皮革材料 &middot; 品质至上</p>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>我们专业从事 TPU、PU、PVC 等高品质皮革材料的生产与销售，产品广泛应用于箱包、鞋材、服装、家居装饰等领域。</p>
+      <p>凭借丰富的花色纹路、稳定的品质和灵活的定制能力，我们为客户提供从选材到应用的一站式解决方案。</p>
+    </div>
+    <div class="about-features">
+      <div class="feature"><h4>花色丰富</h4><p>45+款纹路设计，700+种花色选择，满足多样化需求</p></div>
+      <div class="feature"><h4>品质稳定</h4><p>严格品控流程，确保每批次产品色差小、手感一致</p></div>
+      <div class="feature"><h4>快速交付</h4><p>常备库存充足，支持小批量快速发货</p></div>
+      <div class="feature"><h4>定制服务</h4><p>支持来样定制颜色与纹路，灵活满足客户个性化需求</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-title fade-in">
+    <h2>联系<strong>我们</strong></h2>
+    <p>期待与您的合作</p>
+  </div>
+  <div class="contact-cards fade-in">
+    <div class="contact-card">
+      <div class="contact-icon">&#9742;</div>
+      <div class="contact-label">电话</div>
+      <div class="contact-value">185-8059-4151</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">&#9993;</div>
+      <div class="contact-label">邮箱</div>
+      <div class="contact-value">1303540551@qq.com</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">&#9733;</div>
+      <div class="contact-label">联系人</div>
+      <div class="contact-value">夏海</div>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2024 夏海皮革 XIA HAI LEATHER. All Rights Reserved.</p></footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lb-header">
+    <div class="lb-title" id="lbTitle"></div>
+    <div style="display:flex;align-items:center;gap:16px">
+      <span class="lb-counter" id="lbCounter"></span>
+      <button class="lb-close" id="lbClose">&times;</button>
+    </div>
+  </div>
+  <div class="lb-body">
+    <div class="lb-main">
+      <button class="lb-arrow lb-prev" id="lbPrev">&#10094;</button>
+      <img id="lbImg" src="" alt="">
+      <button class="lb-arrow lb-next" id="lbNext">&#10095;</button>
+    </div>
+  </div>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</div>
+
+<script>
+const products = [
+  {cat:"tpu",name:"3D水立方",imgs:["图片/tpu/3D水立方/微信图片_20240424140832.jpg","图片/tpu/3D水立方/微信图片_20240424140839.jpg","图片/tpu/3D水立方/微信图片_20240424140842.jpg","图片/tpu/3D水立方/微信图片_20240424140845.jpg","图片/tpu/3D水立方/微信图片_20240424140848.jpg","图片/tpu/3D水立方/微信图片_20240424140850.jpg","图片/tpu/3D水立方/微信图片_20240424140852.jpg","图片/tpu/3D水立方/微信图片_20240424140855.jpg","图片/tpu/3D水立方/微信图片_20240425104818.jpg","图片/tpu/3D水立方/微信图片_20240425104824.jpg","图片/tpu/3D水立方/微信图片_20240425104827.jpg","图片/tpu/3D水立方/微信图片_20240427163428.jpg","图片/tpu/3D水立方/微信图片_20240503111756.jpg","图片/tpu/3D水立方/微信图片_20240503152955.jpg","图片/tpu/3D水立方/微信图片_20240503161057.jpg","图片/tpu/3D水立方/微信图片_20240503161114.jpg","图片/tpu/3D水立方/微信图片_20240503161119.jpg","图片/tpu/3D水立方/微信图片_20240503161121.jpg","图片/tpu/3D水立方/微信图片_20240503161123.jpg","图片/tpu/3D水立方/微信图片_20240503161126.jpg","图片/tpu/3D水立方/微信图片_20240503161128.jpg","图片/tpu/3D水立方/微信图片_20240503161130.jpg","图片/tpu/3D水立方/微信图片_20240503162559.jpg","图片/tpu/3D水立方/微信图片_20240503162603.jpg","图片/tpu/3D水立方/微信图片_20240513153117.jpg","图片/tpu/3D水立方/微信图片_20240513153701.jpg","图片/tpu/3D水立方/微信图片_20240531155503.jpg"]},
+  {cat:"tpu",name:"5D猫眼纹",imgs:["图片/tpu/5D猫眼纹/微信图片_20240424174924.jpg","图片/tpu/5D猫眼纹/微信图片_20240424174929.jpg","图片/tpu/5D猫眼纹/微信图片_20240424174931.jpg","图片/tpu/5D猫眼纹/微信图片_20240424174934.jpg","图片/tpu/5D猫眼纹/微信图片_20240424174936.jpg","图片/tpu/5D猫眼纹/微信图片_20240427155738.jpg","图片/tpu/5D猫眼纹/微信图片_20240511100738.jpg","图片/tpu/5D猫眼纹/微信图片_20240511111732.jpg","图片/tpu/5D猫眼纹/微信图片_20240511111737.jpg","图片/tpu/5D猫眼纹/微信图片_20240531155728.jpg"]},
+  {cat:"tpu",name:"乱纹",imgs:["图片/tpu/乱纹/微信图片_20240424141247.jpg","图片/tpu/乱纹/微信图片_20240424141728.jpg","图片/tpu/乱纹/微信图片_20240424141732.jpg","图片/tpu/乱纹/微信图片_20240424141735.jpg","图片/tpu/乱纹/微信图片_20240424141739.jpg","图片/tpu/乱纹/微信图片_20240424141742.jpg","图片/tpu/乱纹/微信图片_20240424141745.jpg","图片/tpu/乱纹/微信图片_20240427163507.jpg","图片/tpu/乱纹/微信图片_20240503152912.jpg","图片/tpu/乱纹/微信图片_20240515140914.jpg","图片/tpu/乱纹/微信图片_20240515144007.jpg","图片/tpu/乱纹/微信图片_20240515144011.jpg","图片/tpu/乱纹/微信图片_20240515144014.jpg","图片/tpu/乱纹/微信图片_20240515144017.jpg","图片/tpu/乱纹/微信图片_20240515144020.jpg","图片/tpu/乱纹/微信图片_20240515144022.jpg","图片/tpu/乱纹/微信图片_20240531154940.jpg"]},
+  {cat:"tpu",name:"光栅反光条纹",imgs:["图片/tpu/光栅反光条纹/微信图片_20240424164228.jpg","图片/tpu/光栅反光条纹/微信图片_20240427163858.jpg","图片/tpu/光栅反光条纹/微信图片_20240510105752.jpg","图片/tpu/光栅反光条纹/微信图片_20240514110400.jpg","图片/tpu/光栅反光条纹/微信图片_20240514171354.jpg","图片/tpu/光栅反光条纹/微信图片_20240514171404.jpg","图片/tpu/光栅反光条纹/微信图片_20240514171407.jpg","图片/tpu/光栅反光条纹/微信图片_20240514171408.jpg","图片/tpu/光栅反光条纹/微信图片_20240531155227.jpg"]},
+  {cat:"tpu",name:"八角星纹",imgs:["图片/tpu/八角星纹/微信图片_20240424152603.jpg","图片/tpu/八角星纹/微信图片_20240424152618.jpg","图片/tpu/八角星纹/微信图片_20240424152621.jpg","图片/tpu/八角星纹/微信图片_20240424152623.jpg","图片/tpu/八角星纹/微信图片_20240427163646.jpg","图片/tpu/八角星纹/微信图片_20240503152617.jpg","图片/tpu/八角星纹/微信图片_20240513094014.jpg","图片/tpu/八角星纹/微信图片_20240513094935.jpg","图片/tpu/八角星纹/微信图片_20240513100319.jpg","图片/tpu/八角星纹/微信图片_20240531155638.jpg"]},
+  {cat:"tpu",name:"十字纹",imgs:["图片/tpu/十字纹/微信图片_20240424135455.jpg","图片/tpu/十字纹/微信图片_20240424135506.jpg","图片/tpu/十字纹/微信图片_20240424135509.jpg","图片/tpu/十字纹/微信图片_20240424135512.jpg","图片/tpu/十字纹/微信图片_20240424135515.jpg","图片/tpu/十字纹/微信图片_20240424135518.jpg","图片/tpu/十字纹/微信图片_20240424135521.jpg","图片/tpu/十字纹/微信图片_20240426174313.jpg","图片/tpu/十字纹/微信图片_20240427163140.jpg","图片/tpu/十字纹/微信图片_20240503153257.jpg","图片/tpu/十字纹/微信图片_20240504171739.jpg","图片/tpu/十字纹/微信图片_20240504171751.jpg","图片/tpu/十字纹/微信图片_20240515110236.jpg","图片/tpu/十字纹/微信图片_20240531154959.jpg"]},
+  {cat:"tpu",name:"小六角纹",imgs:["图片/tpu/小六角纹/微信图片_20240424140451.jpg","图片/tpu/小六角纹/微信图片_20240424140509.jpg","图片/tpu/小六角纹/微信图片_20240424140511.jpg","图片/tpu/小六角纹/微信图片_20240424140514.jpg","图片/tpu/小六角纹/微信图片_20240424140516.jpg","图片/tpu/小六角纹/微信图片_20240424140519.jpg","图片/tpu/小六角纹/微信图片_20240424140521.jpg","图片/tpu/小六角纹/微信图片_20240424140524.jpg","图片/tpu/小六角纹/微信图片_20240424140526.jpg","图片/tpu/小六角纹/微信图片_20240427163413.jpg","图片/tpu/小六角纹/微信图片_20240503153041.jpg","图片/tpu/小六角纹/微信图片_20240504111030.jpg","图片/tpu/小六角纹/微信图片_20240504111049.jpg","图片/tpu/小六角纹/微信图片_20240515103517.jpg","图片/tpu/小六角纹/微信图片_20240531155014.jpg"]},
+  {cat:"tpu",name:"小碎片",imgs:["图片/tpu/小碎片/微信图片_20240424135124.jpg","图片/tpu/小碎片/微信图片_20240424135138.jpg","图片/tpu/小碎片/微信图片_20240424135141.jpg","图片/tpu/小碎片/微信图片_20240424135143.jpg","图片/tpu/小碎片/微信图片_20240424135146.jpg","图片/tpu/小碎片/微信图片_20240424135149.jpg","图片/tpu/小碎片/微信图片_20240424135152.jpg","图片/tpu/小碎片/微信图片_20240424135154.jpg","图片/tpu/小碎片/微信图片_20240427155815.jpg","图片/tpu/小碎片/微信图片_20240503153007.jpg","图片/tpu/小碎片/微信图片_20240515172707.jpg","图片/tpu/小碎片/微信图片_20240515173604.jpg","图片/tpu/小碎片/微信图片_20240515173608.jpg","图片/tpu/小碎片/微信图片_20240515173611.jpg","图片/tpu/小碎片/微信图片_20240515173613.jpg","图片/tpu/小碎片/微信图片_20240515174552.jpg","图片/tpu/小碎片/微信图片_20240531154855.jpg"]},
+  {cat:"tpu",name:"小碎花",imgs:["图片/tpu/小碎花/微信图片_20240424144407.jpg","图片/tpu/小碎花/微信图片_20240424144420.jpg","图片/tpu/小碎花/微信图片_20240424144425.jpg","图片/tpu/小碎花/微信图片_20240424144427.jpg","图片/tpu/小碎花/微信图片_20240424144434.jpg","图片/tpu/小碎花/微信图片_20240427163538.jpg","图片/tpu/小碎花/微信图片_20240503152726.jpg","图片/tpu/小碎花/微信图片_20240513140100.jpg","图片/tpu/小碎花/微信图片_20240531155548.jpg"]},
+  {cat:"tpu",name:"小迷彩",imgs:["图片/tpu/小迷彩/微信图片_20240424164242.jpg","图片/tpu/小迷彩/微信图片_20240427163912.jpg","图片/tpu/小迷彩/微信图片_20240510105809.jpg","图片/tpu/小迷彩/微信图片_20240514110407.jpg","图片/tpu/小迷彩/微信图片_20240514165010.jpg","图片/tpu/小迷彩/微信图片_20240514165022.jpg","图片/tpu/小迷彩/微信图片_20240514165025.jpg","图片/tpu/小迷彩/微信图片_20240514165027.jpg","图片/tpu/小迷彩/微信图片_20240531155203.jpg"]},
+  {cat:"tpu",name:"巴家网格纹",imgs:["图片/tpu/巴家网格纹/O1CN01zoq1LC1itJN6eXg44_!!2217906904470-0-cib.jpg","图片/tpu/巴家网格纹/微信图片_20240424174807.jpg","图片/tpu/巴家网格纹/微信图片_20240424174811.jpg","图片/tpu/巴家网格纹/微信图片_20240424174813.jpg","图片/tpu/巴家网格纹/微信图片_20240424174817.jpg","图片/tpu/巴家网格纹/微信图片_20240427155754.jpg","图片/tpu/巴家网格纹/微信图片_20240514150526.jpg","图片/tpu/巴家网格纹/微信图片_20240514154436.jpg","图片/tpu/巴家网格纹/微信图片_20240527105603.jpg","图片/tpu/巴家网格纹/微信图片_20240531155126.jpg"]},
+  {cat:"tpu",name:"布纹",imgs:["图片/tpu/布纹/微信图片_20240424135955.jpg","图片/tpu/布纹/微信图片_20240424140001.jpg","图片/tpu/布纹/微信图片_20240424140004.jpg","图片/tpu/布纹/微信图片_20240424140006.jpg","图片/tpu/布纹/微信图片_20240424140009.jpg","图片/tpu/布纹/微信图片_20240424140012.jpg","图片/tpu/布纹/微信图片_20240424140015.jpg","图片/tpu/布纹/微信图片_20240424140019.jpg","图片/tpu/布纹/微信图片_20240424140021.jpg","图片/tpu/布纹/微信图片_20240427163347.jpg","图片/tpu/布纹/微信图片_20240503152929.jpg","图片/tpu/布纹/微信图片_20240504105216.jpg","图片/tpu/布纹/微信图片_20240504105228.jpg","图片/tpu/布纹/微信图片_20240504105231.jpg","图片/tpu/布纹/微信图片_20240513141947.jpg","图片/tpu/布纹/微信图片_20240513145602.jpg","图片/tpu/布纹/微信图片_20240531155534.jpg"]},
+  {cat:"tpu",name:"幻彩五角星",imgs:["图片/tpu/幻彩五角星/微信图片_20250308163427.jpg","图片/tpu/幻彩五角星/微信图片_20250422142615.jpg","图片/tpu/幻彩五角星/微信图片_20250422142648.jpg","图片/tpu/幻彩五角星/微信图片_20250422142654.jpg","图片/tpu/幻彩五角星/微信图片_20250422142702.jpg"]},
+  {cat:"tpu",name:"拉丝纹",imgs:["图片/tpu/拉丝纹/微信图片_20240424164217.jpg","图片/tpu/拉丝纹/微信图片_20240427163758.jpg","图片/tpu/拉丝纹/微信图片_20240510105759.jpg","图片/tpu/拉丝纹/微信图片_20240514110353.jpg","图片/tpu/拉丝纹/微信图片_20240514174237.jpg","图片/tpu/拉丝纹/微信图片_20240514174247.jpg","图片/tpu/拉丝纹/微信图片_20240514174253.jpg","图片/tpu/拉丝纹/微信图片_20240514174257.jpg","图片/tpu/拉丝纹/微信图片_20240514174300.jpg","图片/tpu/拉丝纹/微信图片_20240531155036.jpg"]},
+  {cat:"tpu",name:"斜方格",imgs:["图片/tpu/斜方格/微信图片_20240424134944.jpg","图片/tpu/斜方格/微信图片_20240424134956.jpg","图片/tpu/斜方格/微信图片_20240424134959.jpg","图片/tpu/斜方格/微信图片_20240424135002.jpg","图片/tpu/斜方格/微信图片_20240424135005.jpg","图片/tpu/斜方格/微信图片_20240424135008.jpg","图片/tpu/斜方格/微信图片_20240424135011.jpg","图片/tpu/斜方格/微信图片_20240424135013.jpg","图片/tpu/斜方格/微信图片_20240424135016.jpg","图片/tpu/斜方格/微信图片_20240427160636.jpg","图片/tpu/斜方格/微信图片_20240503153055.jpg","图片/tpu/斜方格/微信图片_20240503164300.jpg","图片/tpu/斜方格/微信图片_20240503164446.jpg","图片/tpu/斜方格/微信图片_20240503164449.jpg","图片/tpu/斜方格/微信图片_20240503164451.jpg","图片/tpu/斜方格/微信图片_20240514104456.jpg","图片/tpu/斜方格/微信图片_20240514104508.jpg","图片/tpu/斜方格/微信图片_20240514104511.jpg","图片/tpu/斜方格/微信图片_20240514104513.jpg","图片/tpu/斜方格/微信图片_20240514104515.jpg","图片/tpu/斜方格/微信图片_20240514110332.jpg","图片/tpu/斜方格/微信图片_20240531155302.jpg"]},
+  {cat:"tpu",name:"方块贝壳纹",imgs:["图片/tpu/方块贝壳纹/微信图片_20240424174636.jpg","图片/tpu/方块贝壳纹/微信图片_20240424174644.jpg","图片/tpu/方块贝壳纹/微信图片_20240424174647.jpg","图片/tpu/方块贝壳纹/微信图片_20240424174651.jpg","图片/tpu/方块贝壳纹/微信图片_20240424174658.jpg","图片/tpu/方块贝壳纹/微信图片_20240427155746.jpg","图片/tpu/方块贝壳纹/微信图片_20240511152258.jpg","图片/tpu/方块贝壳纹/微信图片_20240511152300.jpg","图片/tpu/方块贝壳纹/微信图片_20240511152302.jpg","图片/tpu/方块贝壳纹/微信图片_20240531155752.jpg"]},
+  {cat:"tpu",name:"极光树皮纹",imgs:["图片/tpu/极光树皮纹/微信图片_20240424164159.jpg","图片/tpu/极光树皮纹/微信图片_20240427163746.jpg","图片/tpu/极光树皮纹/微信图片_20240510105816.jpg","图片/tpu/极光树皮纹/微信图片_20240514110337.jpg","图片/tpu/极光树皮纹/微信图片_20240514162001.jpg","图片/tpu/极光树皮纹/微信图片_20240514162026.jpg","图片/tpu/极光树皮纹/微信图片_20240514162029.jpg","图片/tpu/极光树皮纹/微信图片_20240514164612.jpg","图片/tpu/极光树皮纹/微信图片_20240531155238.jpg"]},
+  {cat:"tpu",name:"格丽特纹",imgs:["图片/tpu/格丽特纹/微信图片_20240424145346.jpg","图片/tpu/格丽特纹/微信图片_20240424145412.jpg","图片/tpu/格丽特纹/微信图片_20240424145415.jpg","图片/tpu/格丽特纹/微信图片_20240424145418.jpg","图片/tpu/格丽特纹/微信图片_20240427163551.jpg","图片/tpu/格丽特纹/微信图片_20240503152741.jpg","图片/tpu/格丽特纹/微信图片_20240513111257.jpg","图片/tpu/格丽特纹/微信图片_20240531155618.jpg"]},
+  {cat:"tpu",name:"格子纹",imgs:["图片/tpu/格子纹/微信图片_20240424153051.jpg","图片/tpu/格子纹/微信图片_20240424153058.jpg","图片/tpu/格子纹/微信图片_20240424153101.jpg","图片/tpu/格子纹/微信图片_20240424153104.jpg","图片/tpu/格子纹/微信图片_20240424153107.jpg","图片/tpu/格子纹/微信图片_20240424153109.jpg","图片/tpu/格子纹/微信图片_20240424153112.jpg","图片/tpu/格子纹/微信图片_20240424153114.jpg","图片/tpu/格子纹/微信图片_20240424153120.jpg","图片/tpu/格子纹/微信图片_20240427163717.jpg","图片/tpu/格子纹/微信图片_20240503152848.jpg","图片/tpu/格子纹/微信图片_20240515154107.jpg","图片/tpu/格子纹/微信图片_20240515155931.jpg","图片/tpu/格子纹/微信图片_20240515155934.jpg","图片/tpu/格子纹/微信图片_20240515155937.jpg","图片/tpu/格子纹/微信图片_20240515161245.jpg","图片/tpu/格子纹/微信图片_20240531154922.jpg"]},
+  {cat:"tpu",name:"满天星",imgs:["图片/tpu/满天星/微信图片_20240425101447.jpg","图片/tpu/满天星/微信图片_20240425101500.jpg","图片/tpu/满天星/微信图片_20240425101503.jpg","图片/tpu/满天星/微信图片_20240425101505.jpg","图片/tpu/满天星/微信图片_20240425101508.jpg","图片/tpu/满天星/微信图片_20240425101511.jpg","图片/tpu/满天星/微信图片_20240425101513.jpg","图片/tpu/满天星/微信图片_20240425101516.jpg","图片/tpu/满天星/微信图片_20240425101518.jpg","图片/tpu/满天星/微信图片_20240427164131.jpg","图片/tpu/满天星/微信图片_20240503153129.jpg","图片/tpu/满天星/微信图片_20240513163008.jpg","图片/tpu/满天星/微信图片_20240513163221.jpg","图片/tpu/满天星/微信图片_20240513163403.jpg","图片/tpu/满天星/微信图片_20240513163405.jpg","图片/tpu/满天星/微信图片_20240513170827.jpg","图片/tpu/满天星/微信图片_20240531155419.jpg","图片/tpu/满天星/微信图片_20240720142440.jpg"]},
+  {cat:"tpu",name:"猫眼水立方",imgs:["图片/tpu/猫眼水立方/微信图片_20240424153417.jpg","图片/tpu/猫眼水立方/微信图片_20240424153438.jpg","图片/tpu/猫眼水立方/微信图片_20240424153442.jpg","图片/tpu/猫眼水立方/微信图片_20240424153446.jpg","图片/tpu/猫眼水立方/微信图片_20240427163731.jpg","图片/tpu/猫眼水立方/微信图片_20240503152804.jpg","图片/tpu/猫眼水立方/微信图片_20240513134230.jpg","图片/tpu/猫眼水立方/微信图片_20240531155602.jpg"]},
+  {cat:"tpu",name:"玻璃碎片纹",imgs:["图片/tpu/玻璃碎片纹/微信图片_20240424142509.jpg","图片/tpu/玻璃碎片纹/微信图片_20240424142525.jpg","图片/tpu/玻璃碎片纹/微信图片_20240424142529.jpg","图片/tpu/玻璃碎片纹/微信图片_20240424142532.jpg","图片/tpu/玻璃碎片纹/微信图片_20240427155803.jpg","图片/tpu/玻璃碎片纹/微信图片_20240427160705.jpg","图片/tpu/玻璃碎片纹/微信图片_20240503152707.jpg","图片/tpu/玻璃碎片纹/微信图片_20240511163354.jpg","图片/tpu/玻璃碎片纹/微信图片_20240511163833.jpg","图片/tpu/玻璃碎片纹/微信图片_20240531155721.jpg"]},
+  {cat:"tpu",name:"石头纹",imgs:["图片/tpu/石头纹/微信图片_20240424135319.jpg","图片/tpu/石头纹/微信图片_20240424135332.jpg","图片/tpu/石头纹/微信图片_20240424135335.jpg","图片/tpu/石头纹/微信图片_20240424135338.jpg","图片/tpu/石头纹/微信图片_20240424135340.jpg","图片/tpu/石头纹/微信图片_20240424135348.jpg","图片/tpu/石头纹/微信图片_20240424135351.jpg","图片/tpu/石头纹/微信图片_20240424135354.jpg","图片/tpu/石头纹/微信图片_20240424135357.jpg","图片/tpu/石头纹/微信图片_20240427155832.jpg","图片/tpu/石头纹/微信图片_20240503153243.jpg","图片/tpu/石头纹/微信图片_20240504110154.jpg","图片/tpu/石头纹/微信图片_20240514175859.jpg","图片/tpu/石头纹/微信图片_20240514175911.jpg","图片/tpu/石头纹/微信图片_20240514175915.jpg","图片/tpu/石头纹/微信图片_20240514175918.jpg","图片/tpu/石头纹/微信图片_20240514175922.jpg","图片/tpu/石头纹/微信图片_20240515093832.jpg","图片/tpu/石头纹/微信图片_20240531155024.jpg"]},
+  {cat:"tpu",name:"碳钎纹",imgs:["图片/tpu/碳钎纹/微信图片_20240424164252.jpg","图片/tpu/碳钎纹/微信图片_20240427163924.jpg","图片/tpu/碳钎纹/微信图片_20240510105734.jpg","图片/tpu/碳钎纹/微信图片_20240514110418.jpg","图片/tpu/碳钎纹/微信图片_20240514172528.jpg","图片/tpu/碳钎纹/微信图片_20240514172538.jpg","图片/tpu/碳钎纹/微信图片_20240514172541.jpg","图片/tpu/碳钎纹/微信图片_20240514172543.jpg","图片/tpu/碳钎纹/微信图片_20240531155147.jpg"]},
+  {cat:"tpu",name:"网纹",imgs:["图片/tpu/网纹/微信图片_20240424142312.jpg","图片/tpu/网纹/微信图片_20240424142325.jpg","图片/tpu/网纹/微信图片_20240424142328.jpg","图片/tpu/网纹/微信图片_20240424142331.jpg","图片/tpu/网纹/微信图片_20240424142334.jpg","图片/tpu/网纹/微信图片_20240427163523.jpg","图片/tpu/网纹/微信图片_20240503152636.jpg","图片/tpu/网纹/微信图片_20240513100953.jpg","图片/tpu/网纹/微信图片_20240531155625.jpg"]},
+  {cat:"tpu",name:"豹纹",imgs:["图片/tpu/豹纹/微信图片_20240424135737.jpg","图片/tpu/豹纹/微信图片_20240424135746.jpg","图片/tpu/豹纹/微信图片_20240424135749.jpg","图片/tpu/豹纹/微信图片_20240424135751.jpg","图片/tpu/豹纹/微信图片_20240424135754.jpg","图片/tpu/豹纹/微信图片_20240424135756.jpg","图片/tpu/豹纹/微信图片_20240424135759.jpg","图片/tpu/豹纹/微信图片_20240424135802.jpg","图片/tpu/豹纹/微信图片_20240424135804.jpg","图片/tpu/豹纹/微信图片_20240427163110.jpg","图片/tpu/豹纹/微信图片_20240503153030.jpg","图片/tpu/豹纹/微信图片_20240515150318.jpg","图片/tpu/豹纹/微信图片_20240515153152.jpg","图片/tpu/豹纹/微信图片_20240515153156.jpg","图片/tpu/豹纹/微信图片_20240531154931.jpg"]},
+  {cat:"tpu",name:"迷彩",imgs:["图片/tpu/迷彩/微信图片_20240424102159.jpg","图片/tpu/迷彩/微信图片_20240424102214.jpg","图片/tpu/迷彩/微信图片_20240424102219.jpg","图片/tpu/迷彩/微信图片_20240424102222.jpg","图片/tpu/迷彩/微信图片_20240424102225.jpg","图片/tpu/迷彩/微信图片_20240424102228.jpg","图片/tpu/迷彩/微信图片_20240424102233.jpg","图片/tpu/迷彩/微信图片_20240424102237.jpg","图片/tpu/迷彩/微信图片_20240424102239.jpg","图片/tpu/迷彩/微信图片_20240427161247.jpg","图片/tpu/迷彩/微信图片_20240503153219.jpg","图片/tpu/迷彩/微信图片_20240515175030.jpg","图片/tpu/迷彩/微信图片_20240516092123.jpg","图片/tpu/迷彩/微信图片_20240516092130.jpg","图片/tpu/迷彩/微信图片_20240516092132.jpg","图片/tpu/迷彩/微信图片_20240531154820.jpg"]},
+  {cat:"tpu",name:"银砖反光镭射纹",imgs:["图片/tpu/银砖反光镭射纹/微信图片_20240424174822.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240424174912.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240424174915.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240424174918.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240424174920.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240427155623.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240514150519.jpg","图片/tpu/银砖反光镭射纹/微信图片_20240531155139.jpg"]},
+  {cat:"tpu",name:"镭射小三角",imgs:["图片/tpu/镭射小三角/c000879ce8a6f84fdc9d216547f092f0.jpg","图片/tpu/镭射小三角/微信图片_20250308163402.jpg","图片/tpu/镭射小三角/微信图片_20250422142748.jpg","图片/tpu/镭射小三角/微信图片_20250422142803.jpg","图片/tpu/镭射小三角/微信图片_20250422142808.jpg","图片/tpu/镭射小三角/微信图片_20250422142813.jpg"]},
+  {cat:"tpu",name:"镭射拉丝小迷彩",imgs:["图片/tpu/镭射拉丝小迷彩/微信图片_20240826174730.jpg","图片/tpu/镭射拉丝小迷彩/微信图片_20240826174753.jpg","图片/tpu/镭射拉丝小迷彩/微信图片_20240826174757.jpg","图片/tpu/镭射拉丝小迷彩/微信图片_20240826174803.jpg","图片/tpu/镭射拉丝小迷彩/微信图片_20240826174818.jpg","图片/tpu/镭射拉丝小迷彩/微信图片_20240826174848.jpg"]},
+  {cat:"tpu",name:"闪电纹",imgs:["图片/tpu/闪电纹/微信图片_20240424134727.jpg","图片/tpu/闪电纹/微信图片_20240424134746.jpg","图片/tpu/闪电纹/微信图片_20240424134750.jpg","图片/tpu/闪电纹/微信图片_20240424134754.jpg","图片/tpu/闪电纹/微信图片_20240424134800.jpg","图片/tpu/闪电纹/微信图片_20240424134803.jpg","图片/tpu/闪电纹/微信图片_20240424134808.jpg","图片/tpu/闪电纹/微信图片_20240424134812.jpg","图片/tpu/闪电纹/微信图片_20240424134815.jpg","图片/tpu/闪电纹/微信图片_20240427160652.jpg","图片/tpu/闪电纹/微信图片_20240503153108.jpg","图片/tpu/闪电纹/微信图片_20240515170624.jpg","图片/tpu/闪电纹/微信图片_20240515171702.jpg","图片/tpu/闪电纹/微信图片_20240531154909.jpg"]},
+  {cat:"tpu",name:"鱼鳞纹",imgs:["图片/tpu/鱼鳞纹/微信图片_20250308163420.jpg","图片/tpu/鱼鳞纹/微信图片_20250422142714.jpg","图片/tpu/鱼鳞纹/微信图片_20250422142724.jpg","图片/tpu/鱼鳞纹/微信图片_20250422142728.jpg","图片/tpu/鱼鳞纹/微信图片_20250422142733.jpg","图片/tpu/鱼鳞纹/微信图片_20250422142819.jpg"]},
+  {cat:"pu",name:"TC细布PU",imgs:["图片/pu/TC细布pu/微信图片_20240425105632.jpg","图片/pu/TC细布pu/微信图片_20240425105643.jpg","图片/pu/TC细布pu/微信图片_20240425105646.jpg","图片/pu/TC细布pu/微信图片_20240425105649.jpg","图片/pu/TC细布pu/微信图片_20240425105652.jpg","图片/pu/TC细布pu/微信图片_20240425105654.jpg","图片/pu/TC细布pu/微信图片_20240425112536.jpg","图片/pu/TC细布pu/微信图片_20240428095329.jpg","图片/pu/TC细布pu/微信图片_20240428095357.jpg","图片/pu/TC细布pu/微信图片_20240428095400.jpg","图片/pu/TC细布pu/微信图片_20240428095407.jpg","图片/pu/TC细布pu/微信图片_20240428095417.jpg","图片/pu/TC细布pu/微信图片_20240516102644.jpg","图片/pu/TC细布pu/微信图片_20240516102654.jpg","图片/pu/TC细布pu/微信图片_20240516102657.jpg","图片/pu/TC细布pu/微信图片_20240516102659.jpg","图片/pu/TC细布pu/微信图片_20240516102701.jpg","图片/pu/TC细布pu/微信图片_20240516104210.jpg","图片/pu/TC细布pu/微信图片_20240601140934.jpg"]},
+  {cat:"pu",name:"仿棉绒PU",imgs:["图片/pu/仿棉绒pu/微信图片_20240424102313.jpg","图片/pu/仿棉绒pu/微信图片_20240424102318.jpg","图片/pu/仿棉绒pu/微信图片_20240424102322.jpg","图片/pu/仿棉绒pu/微信图片_20240424102324.jpg","图片/pu/仿棉绒pu/微信图片_20240424102327.jpg","图片/pu/仿棉绒pu/微信图片_20240424102330.jpg","图片/pu/仿棉绒pu/微信图片_20240424102332.jpg","图片/pu/仿棉绒pu/微信图片_20240424102335.jpg","图片/pu/仿棉绒pu/微信图片_20240425152625.jpg","图片/pu/仿棉绒pu/微信图片_20240425152633.jpg","图片/pu/仿棉绒pu/微信图片_20240425152636.jpg","图片/pu/仿棉绒pu/微信图片_20240425152638.jpg","图片/pu/仿棉绒pu/微信图片_20240430162933.jpg","图片/pu/仿棉绒pu/微信图片_20240430162936.jpg","图片/pu/仿棉绒pu/微信图片_20240430162938.jpg","图片/pu/仿棉绒pu/微信图片_20240430162941.jpg","图片/pu/仿棉绒pu/微信图片_20240430162944.jpg","图片/pu/仿棉绒pu/微信图片_20240430162947.jpg","图片/pu/仿棉绒pu/微信图片_20240430162950.jpg","图片/pu/仿棉绒pu/微信图片_20240430162952.jpg"]},
+  {cat:"pu",name:"仿棉绒鳄鱼纹",imgs:["图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174857.jpg","图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174914.jpg","图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174920.jpg","图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174922.jpg","图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174928.jpg","图片/pu/仿棉绒鳄鱼纹/微信图片_20240826174934.jpg"]},
+  {cat:"pu",name:"佳积弹力布光学PU",imgs:["图片/pu/佳积弹力布光学pu/微信图片_20240425112349.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240425112356.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240425112359.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240425112401.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240425112404.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240425112608.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240428171527.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240428171537.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240428171540.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240429142200.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240429142206.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240516134439.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240516134456.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240516134500.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240516134503.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240516134506.jpg","图片/pu/佳积弹力布光学pu/微信图片_20240601140957.jpg"]},
+  {cat:"pu",name:"光学无溶剂PU",imgs:["图片/pu/光学无溶剂pu/微信图片_20240425111914.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111921.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111924.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111926.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111928.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111930.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111932.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111934.jpg","图片/pu/光学无溶剂pu/微信图片_20240425111936.jpg","图片/pu/光学无溶剂pu/微信图片_20240429142247.jpg","图片/pu/光学无溶剂pu/微信图片_20240429142255.jpg","图片/pu/光学无溶剂pu/微信图片_20240429142258.jpg","图片/pu/光学无溶剂pu/微信图片_20240429142300.jpg","图片/pu/光学无溶剂pu/微信图片_20240429142331.jpg"]},
+  {cat:"pu",name:"太空革PU",imgs:["图片/pu/太空革pu/微信图片_20240425105749.jpg","图片/pu/太空革pu/微信图片_20240425105755.jpg","图片/pu/太空革pu/微信图片_20240425105758.jpg","图片/pu/太空革pu/微信图片_20240425105800.jpg","图片/pu/太空革pu/微信图片_20240425105802.jpg","图片/pu/太空革pu/微信图片_20240425105805.jpg","图片/pu/太空革pu/微信图片_20240425105807.jpg","图片/pu/太空革pu/微信图片_20240425105809.jpg","图片/pu/太空革pu/微信图片_20240425105811.jpg","图片/pu/太空革pu/微信图片_20240425110631.jpg","图片/pu/太空革pu/微信图片_20240425110641.jpg","图片/pu/太空革pu/微信图片_20240425140957.jpg","图片/pu/太空革pu/微信图片_20240425141007.jpg","图片/pu/太空革pu/微信图片_20240428101811.jpg","图片/pu/太空革pu/微信图片_20240428101817.jpg","图片/pu/太空革pu/微信图片_20240428164034.jpg","图片/pu/太空革pu/微信图片_20240428164049.jpg","图片/pu/太空革pu/微信图片_20240428164059.jpg","图片/pu/太空革pu/微信图片_20240428164102.jpg","图片/pu/太空革pu/微信图片_20240428164104.jpg"]},
+  {cat:"pu",name:"无溶剂十字纹",imgs:["图片/pu/无溶剂十字纹/微信图片_20240517160537.jpg","图片/pu/无溶剂十字纹/微信图片_20240517160543.jpg","图片/pu/无溶剂十字纹/微信图片_20240517160545.jpg","图片/pu/无溶剂十字纹/微信图片_20240517160548.jpg","图片/pu/无溶剂十字纹/微信图片_20240517160550.jpg","图片/pu/无溶剂十字纹/微信图片_20240517160552.jpg","图片/pu/无溶剂十字纹/微信图片_20240517161332.jpg","图片/pu/无溶剂十字纹/微信图片_20240517162532.jpg","图片/pu/无溶剂十字纹/微信图片_20240517162535.jpg","图片/pu/无溶剂十字纹/微信图片_20240517162537.jpg","图片/pu/无溶剂十字纹/微信图片_20240517162836.jpg","图片/pu/无溶剂十字纹/微信图片_20240517163235.jpg","图片/pu/无溶剂十字纹/微信图片_20240601154945.jpg"]},
+  {cat:"pu",name:"无溶剂小六角",imgs:["图片/pu/无溶剂小六角/微信图片_20240521100752.jpg","图片/pu/无溶剂小六角/微信图片_20240521105410.jpg","图片/pu/无溶剂小六角/微信图片_20240521105416.jpg","图片/pu/无溶剂小六角/微信图片_20240521110003.jpg","图片/pu/无溶剂小六角/微信图片_20240601155024.jpg"]},
+  {cat:"pu",name:"无溶剂小碎片",imgs:["图片/pu/无溶剂小碎片/微信图片_20240517162915.jpg","图片/pu/无溶剂小碎片/微信图片_20240517164759.jpg","图片/pu/无溶剂小碎片/微信图片_20240517170933.jpg","图片/pu/无溶剂小碎片/微信图片_20240517170936.jpg","图片/pu/无溶剂小碎片/微信图片_20240601155016.jpg"]},
+  {cat:"pu",name:"无溶剂布纹",imgs:["图片/pu/无溶剂布纹/微信图片_20240521100745.jpg","图片/pu/无溶剂布纹/微信图片_20240521100804.jpg","图片/pu/无溶剂布纹/微信图片_20240521102958.jpg","图片/pu/无溶剂布纹/微信图片_20240521103004.jpg","图片/pu/无溶剂布纹/微信图片_20240601155005.jpg"]},
+  {cat:"pu",name:"无溶剂满天星",imgs:["图片/pu/无溶剂满天星/微信图片_20240517174825.jpg","图片/pu/无溶剂满天星/微信图片_20240518102806.jpg","图片/pu/无溶剂满天星/微信图片_20240520104256.jpg","图片/pu/无溶剂满天星/微信图片_20240520104303.jpg","图片/pu/无溶剂满天星/微信图片_20240601154955.jpg"]},
+  {cat:"pu",name:"水刺布PU",imgs:["图片/pu/水刺布pu/微信图片_20240425105916.jpg","图片/pu/水刺布pu/微信图片_20240425105922.jpg","图片/pu/水刺布pu/微信图片_20240425105925.jpg","图片/pu/水刺布pu/微信图片_20240425105928.jpg","图片/pu/水刺布pu/微信图片_20240425105930.jpg","图片/pu/水刺布pu/微信图片_20240425105932.jpg","图片/pu/水刺布pu/微信图片_20240425105934.jpg","图片/pu/水刺布pu/微信图片_20240425105936.jpg","图片/pu/水刺布pu/微信图片_20240425105939.jpg","图片/pu/水刺布pu/微信图片_20240425110536.jpg","图片/pu/水刺布pu/微信图片_20240425110611.jpg","图片/pu/水刺布pu/微信图片_20240425141013.jpg","图片/pu/水刺布pu/微信图片_20240425141020.jpg","图片/pu/水刺布pu/微信图片_20240425141316.jpg","图片/pu/水刺布pu/微信图片_20240425141325.jpg","图片/pu/水刺布pu/微信图片_20240425141327.jpg","图片/pu/水刺布pu/微信图片_20240425141330.jpg","图片/pu/水刺布pu/微信图片_20240425141333.jpg","图片/pu/水刺布pu/微信图片_20240425141336.jpg","图片/pu/水刺布pu/微信图片_20240425141339.jpg"]},
+  {cat:"pu",name:"水立方仿棉绒PU革",imgs:["图片/pu/水立方仿棉绒pu革/微信图片_20240425140145.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140151.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140154.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140157.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140159.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140202.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140204.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140206.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140209.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140746.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140752.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140755.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240425140758.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240503111741.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240503111756.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240503111759.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240517104932.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240517113126.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240517142418.jpg","图片/pu/水立方仿棉绒pu革/微信图片_20240601141023.jpg"]},
+  {cat:"pvc",name:"仙度瑞拉PVC",imgs:["图片/仙度瑞拉pvc/产品总图.jpg","图片/仙度瑞拉pvc/1.jpg","图片/仙度瑞拉pvc/2.jpg","图片/仙度瑞拉pvc/3.jpg","图片/仙度瑞拉pvc/4.jpg","图片/仙度瑞拉pvc/5.jpg","图片/仙度瑞拉pvc/6.jpg","图片/仙度瑞拉pvc/7.jpg","图片/仙度瑞拉pvc/8.jpg","图片/仙度瑞拉pvc/9.jpg","图片/仙度瑞拉pvc/10.jpg","图片/仙度瑞拉pvc/11.jpg","图片/仙度瑞拉pvc/12.jpg","图片/仙度瑞拉pvc/13.jpg","图片/仙度瑞拉pvc/14.jpg","图片/仙度瑞拉pvc/15.jpg","图片/仙度瑞拉pvc/16.jpg","图片/仙度瑞拉pvc/17.jpg","图片/仙度瑞拉pvc/18.jpg","图片/仙度瑞拉pvc/19.jpg","图片/仙度瑞拉pvc/20.jpg","图片/仙度瑞拉pvc/21.jpg","图片/仙度瑞拉pvc/22.jpg","图片/仙度瑞拉pvc/23.jpg","图片/仙度瑞拉pvc/24.jpg","图片/仙度瑞拉pvc/25.jpg","图片/仙度瑞拉pvc/26.jpg","图片/仙度瑞拉pvc/27.jpg","图片/仙度瑞拉pvc/28.jpg","图片/仙度瑞拉pvc/29.jpg","图片/仙度瑞拉pvc/30.jpg","图片/仙度瑞拉pvc/31.jpg","图片/仙度瑞拉pvc/色卡1.jpg","图片/仙度瑞拉pvc/色卡2.jpg","图片/仙度瑞拉pvc/色卡3.jpg","图片/仙度瑞拉pvc/色卡4.jpg"]}
+];
+
+const grid=document.getElementById('grid');
+const tabs=document.getElementById('tabs');
+const lightbox=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+const lbTitle=document.getElementById('lbTitle');
+const lbCounter=document.getElementById('lbCounter');
+const lbThumbs=document.getElementById('lbThumbs');
+let currentProduct=null,currentIndex=0;
+
+function badgeClass(cat){return cat==='tpu'?'badge-tpu':cat==='pu'?'badge-pu':'badge-pvc'}
+function badgeLabel(cat){return cat.toUpperCase()}
+
+function renderGrid(filter){
+  grid.innerHTML='';
+  const items=filter==='all'?products:products.filter(p=>p.cat===filter);
+  items.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.style.animationDelay=i*30+'ms';
+    card.innerHTML=`<span class="product-badge ${badgeClass(p.cat)}">${badgeLabel(p.cat)}</span><img src="${encodeURI(p.imgs[0])}" alt="${p.name}" loading="lazy"><div class="product-info"><div class="product-name">${p.name}</div><div class="product-count">${p.imgs.length} 张样品图</div></div>`;
+    card.addEventListener('click',()=>openLightbox(p,0));
+    grid.appendChild(card);
+  });
+}
+
+tabs.addEventListener('click',e=>{
+  if(!e.target.classList.contains('tab'))return;
+  tabs.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  e.target.classList.add('active');
+  renderGrid(e.target.dataset.cat);
+});
+
+function openLightbox(product,index){
+  currentProduct=product;currentIndex=index;
+  lightbox.classList.add('active');
+  document.body.style.overflow='hidden';
+  updateLightbox();
+}
+function closeLightbox(){
+  lightbox.classList.remove('active');
+  document.body.style.overflow='';
+}
+function updateLightbox(){
+  lbImg.src=encodeURI(currentProduct.imgs[currentIndex]);
+  lbTitle.textContent=currentProduct.name+' - '+currentProduct.cat.toUpperCase();
+  lbCounter.textContent=(currentIndex+1)+' / '+currentProduct.imgs.length;
+  lbThumbs.innerHTML='';
+  currentProduct.imgs.forEach((img,i)=>{
+    const d=document.createElement('div');
+    d.className='lb-thumb'+(i===currentIndex?' active':'');
+    d.innerHTML=`<img src="${encodeURI(img)}" alt="" loading="lazy">`;
+    d.addEventListener('click',()=>{currentIndex=i;updateLightbox()});
+    lbThumbs.appendChild(d);
+  });
+  const active=lbThumbs.querySelector('.active');
+  if(active)active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+document.getElementById('lbClose').addEventListener('click',closeLightbox);
+document.getElementById('lbPrev').addEventListener('click',()=>{currentIndex=(currentIndex-1+currentProduct.imgs.length)%currentProduct.imgs.length;updateLightbox()});
+document.getElementById('lbNext').addEventListener('click',()=>{currentIndex=(currentIndex+1)%currentProduct.imgs.length;updateLightbox()});
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
+document.addEventListener('keydown',e=>{
+  if(!lightbox.classList.contains('active'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowLeft'){currentIndex=(currentIndex-1+currentProduct.imgs.length)%currentProduct.imgs.length;updateLightbox()}
+  if(e.key==='ArrowRight'){currentIndex=(currentIndex+1)%currentProduct.imgs.length;updateLightbox()}
+});
+
+// Nav
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50)});
+document.getElementById('mobileToggle').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open')}));
+
+// Scroll animations
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.15});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Counter animation
+const counterObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target;const target=parseInt(el.dataset.count);let current=0;const step=Math.ceil(target/40);const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=current+'+'},30);counterObserver.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>counterObserver.observe(el));
+
+// Active nav link
+const sections=document.querySelectorAll('section,.hero');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.id||''});
+  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+});
+
+renderGrid('all');
+</script>
+</body>
+</html>
