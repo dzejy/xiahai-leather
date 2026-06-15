@@ -93,15 +93,18 @@ section{padding:100px 40px}
 .lb-close:hover{border-color:var(--accent);color:var(--accent)}
 .lb-body{flex:1;display:flex;overflow:hidden;position:relative}
 .lb-main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-width:0}
-.lb-main img{max-width:90%;max-height:85vh;object-fit:contain;transition:opacity .3s}
+.lb-main img,.lb-main video{max-width:90%;max-height:85vh;object-fit:contain;transition:opacity .3s}
+.lb-main video{display:none;background:#000}
 .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);border:1px solid var(--border);color:var(--text);font-size:20px;cursor:pointer;transition:all .3s;z-index:5}
 .lb-arrow:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .lb-prev{left:20px}.lb-next{right:20px}
 .lb-thumbs{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;overflow-x:auto;flex-shrink:0}
 .lb-thumbs::-webkit-scrollbar{height:4px}.lb-thumbs::-webkit-scrollbar-track{background:var(--surface)}.lb-thumbs::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
-.lb-thumb{width:64px;height:64px;flex-shrink:0;cursor:pointer;border:2px solid transparent;transition:all .3s;opacity:.5}
+.lb-thumb{width:64px;height:64px;flex-shrink:0;cursor:pointer;border:2px solid transparent;transition:all .3s;opacity:.5;position:relative;background:#000}
 .lb-thumb:hover{opacity:.8}.lb-thumb.active{border-color:var(--accent);opacity:1}
-.lb-thumb img{width:100%;height:100%;object-fit:cover}
+.lb-thumb img,.lb-thumb video{width:100%;height:100%;object-fit:cover}
+.video-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.24)}
+.video-play::before{content:'';width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid #fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 .lb-counter{color:var(--text2);font-size:13px}
 
 /* ABOUT */
@@ -263,6 +266,7 @@ footer p{color:var(--text2);font-size:13px;letter-spacing:1px}
     <div class="lb-main">
       <button class="lb-arrow lb-prev" id="lbPrev">&#10094;</button>
       <img id="lbImg" src="" alt="">
+      <video id="lbVideo" controls playsinline></video>
       <button class="lb-arrow lb-next" id="lbNext">&#10095;</button>
     </div>
   </div>
@@ -319,10 +323,44 @@ const products = [
   {cat:"pvc",name:"仙度瑞拉PVC",imgs:["图片/仙度瑞拉pvc/产品总图.jpg","图片/仙度瑞拉pvc/1.jpg","图片/仙度瑞拉pvc/2.jpg","图片/仙度瑞拉pvc/3.jpg","图片/仙度瑞拉pvc/4.jpg","图片/仙度瑞拉pvc/5.jpg","图片/仙度瑞拉pvc/6.jpg","图片/仙度瑞拉pvc/7.jpg","图片/仙度瑞拉pvc/8.jpg","图片/仙度瑞拉pvc/9.jpg","图片/仙度瑞拉pvc/10.jpg","图片/仙度瑞拉pvc/11.jpg","图片/仙度瑞拉pvc/12.jpg","图片/仙度瑞拉pvc/13.jpg","图片/仙度瑞拉pvc/14.jpg","图片/仙度瑞拉pvc/15.jpg","图片/仙度瑞拉pvc/16.jpg","图片/仙度瑞拉pvc/17.jpg","图片/仙度瑞拉pvc/18.jpg","图片/仙度瑞拉pvc/19.jpg","图片/仙度瑞拉pvc/20.jpg","图片/仙度瑞拉pvc/21.jpg","图片/仙度瑞拉pvc/22.jpg","图片/仙度瑞拉pvc/23.jpg","图片/仙度瑞拉pvc/24.jpg","图片/仙度瑞拉pvc/25.jpg","图片/仙度瑞拉pvc/26.jpg","图片/仙度瑞拉pvc/27.jpg","图片/仙度瑞拉pvc/28.jpg","图片/仙度瑞拉pvc/29.jpg","图片/仙度瑞拉pvc/30.jpg","图片/仙度瑞拉pvc/31.jpg","图片/仙度瑞拉pvc/色卡1.jpg","图片/仙度瑞拉pvc/色卡2.jpg","图片/仙度瑞拉pvc/色卡3.jpg","图片/仙度瑞拉pvc/色卡4.jpg"]}
 ];
 
+const productVideos = {
+  "tpu/3D水立方":["图片/视频/tpu/水立方/a8feee035897a742a9d9674f355b28be.mp4"],
+  "tpu/5D猫眼纹":["图片/视频/tpu/5D猫眼纹/3639f08bea716290d08a65cac34789c2.mp4"],
+  "tpu/乱纹":["图片/视频/tpu/乱纹/a895eba1d8783caf90e60dd7f0e2e01b.mp4"],
+  "tpu/光栅反光条纹":["图片/视频/tpu/光栅放光条纹/16e7ff101123002313e8158b43431918.mp4"],
+  "tpu/八角星纹":["图片/视频/tpu/八角星纹/0213b8d3b66395916c61c89d5fc53d85.mp4"],
+  "tpu/十字纹":["图片/视频/tpu/十字纹/3725f74fb69ed306f939a1e8c1618e30.mp4"],
+  "tpu/小六角纹":["图片/视频/tpu/小六角纹/cfe9d63c9a8dcc87bbed0ef881563950.mp4"],
+  "tpu/小碎片":["图片/视频/tpu/小碎片/1b713397e14539a370a29fa1959b798c.mp4"],
+  "tpu/小碎花":["图片/视频/tpu/小碎花/94b0f1eb558610c8f3fab0407d999ffb.mp4"],
+  "tpu/小迷彩":["图片/视频/tpu/小迷彩/b2448c31ba539be97a0badaef541c3af.mp4"],
+  "tpu/巴家网格纹":["图片/视频/tpu/巴家网格纹/984b7ac95dd705fe36317ad31bbfaaf7.mp4"],
+  "tpu/布纹":["图片/视频/tpu/布纹/1765701e69727028f9551beb93add610.mp4"],
+  "tpu/拉丝纹":["图片/视频/tpu/拉丝纹/05b3c9efa395097ddf3f77cfbac239f3.mp4"],
+  "tpu/斜方格":["图片/视频/tpu/斜方格/41673babb5cde473c254250fc344ae26.mp4","图片/视频/tpu/斜方格/89107fef85d32d7381e000d586b1288f.mp4","图片/视频/tpu/斜方格/e62a08e9715b1f656026092d4fc11b9e.mp4"],
+  "tpu/方块贝壳纹":["图片/视频/tpu/方块贝壳纹/65e7f20516cba3841a9390740537bacc.mp4"],
+  "tpu/极光树皮纹":["图片/视频/tpu/极光树皮纹/69669d04e4674f3d20fa7dc6d1aeb6f0.mp4","图片/视频/tpu/极光树皮纹/WeChat_20250628093512.mp4"],
+  "tpu/格丽特纹":["图片/视频/tpu/格丽特纹/e6f957a28a340e11d593ea1ef807f620.mp4"],
+  "tpu/格子纹":["图片/视频/tpu/格子纹/2f00e4fe2db2521e68f4114147fa4c91.mp4"],
+  "tpu/满天星":["图片/视频/tpu/满天星/e8df2f2efcef03c80777ff3bfed1b255.mp4"],
+  "tpu/猫眼水立方":["图片/视频/tpu/猫眼水立方/c0dcafc9e1e496bd43f2753b485ec717.mp4"],
+  "tpu/玻璃碎片纹":["图片/视频/tpu/玻璃碎片纹/6308c199d436cbcefccc1f8e86d6142d.mp4"],
+  "tpu/石头纹":["图片/视频/tpu/石头纹/b5a442a0a77d7ceea40845588b7576a4.mp4","图片/视频/tpu/石头纹/WeChat_20250620091817.mp4"],
+  "tpu/碳钎纹":["图片/视频/tpu/碳钎纹/fe3a44fca8866f7486bf16c36a57a3b2.mp4"],
+  "tpu/网纹":["图片/视频/tpu/网纹/41259334d212b9f827ba334e7cb535fc.mp4"],
+  "tpu/豹纹":["图片/视频/tpu/豹纹/0dc837604b5c00f2dd5bcda15d87b4ba.mp4"],
+  "tpu/迷彩":["图片/视频/tpu/迷彩/a9124e41e3876056933f213732effc89.mp4"],
+  "tpu/银砖反光镭射纹":["图片/视频/tpu/银砖反光镭射纹/fceda829d90ff75d812ef8f85662ff4e.mp4"],
+  "tpu/镭射拉丝小迷彩":["图片/视频/tpu/镭射拉丝小迷彩/21f8cacb4165473a5c0a0232b6da2f37.mp4","图片/视频/tpu/镭射拉丝小迷彩/944a9fa20ce70b24d4214b8425149213.mp4","图片/视频/tpu/镭射拉丝小迷彩/aa9963f41927c27de3659adf223671b0.mp4","图片/视频/tpu/镭射拉丝小迷彩/d188bd01733af3b2cc50b9c41c491ab8.mp4","图片/视频/tpu/镭射拉丝小迷彩/d7dcaf2035f270515860b7fc1820fdd2.mp4"],
+  "tpu/闪电纹":["图片/视频/tpu/闪电纹/4f8670525f71d58851bb0934249c6baf.mp4","图片/视频/tpu/闪电纹/74e621e29e5b80a9ab113f093b601b7b.mp4"],
+  "pu/仿棉绒鳄鱼纹":["图片/视频/tpu/鳄鱼纹/04debdc43b517783a867465a3cfc59a1.mp4"]
+};
+
 const grid=document.getElementById('grid');
 const tabs=document.getElementById('tabs');
 const lightbox=document.getElementById('lightbox');
 const lbImg=document.getElementById('lbImg');
+const lbVideo=document.getElementById('lbVideo');
 const lbTitle=document.getElementById('lbTitle');
 const lbCounter=document.getElementById('lbCounter');
 const lbThumbs=document.getElementById('lbThumbs');
@@ -330,6 +368,16 @@ let currentProduct=null,currentIndex=0;
 
 function badgeClass(cat){return cat==='tpu'?'badge-tpu':cat==='pu'?'badge-pu':'badge-pvc'}
 function badgeLabel(cat){return cat.toUpperCase()}
+function productKey(product){return product.cat+'/'+product.name}
+function getMedia(product){
+  const videos=(productVideos[productKey(product)]||[]).map(src=>({type:'video',src}));
+  const images=product.imgs.map(src=>({type:'image',src}));
+  return videos.concat(images);
+}
+function defaultMediaIndex(product){
+  const videos=productVideos[productKey(product)]||[];
+  return videos.length;
+}
 
 let tpuExpanded=false;
 function makeCard(p,i){
@@ -337,7 +385,7 @@ function makeCard(p,i){
   card.className='product-card';
   card.style.animationDelay=i*30+'ms';
   card.innerHTML=`<span class="product-badge ${badgeClass(p.cat)}">${badgeLabel(p.cat)}</span><img src="${encodeURI(p.imgs[0])}" alt="${p.name}" loading="lazy"><div class="product-info"><div class="product-name">${p.name}</div><div class="product-count">${p.imgs.length} 张样品图</div></div>`;
-  card.addEventListener('click',()=>openLightbox(p,0));
+  card.addEventListener('click',()=>openLightbox(p));
   return card;
 }
 function renderGrid(filter){
@@ -373,7 +421,8 @@ tabs.addEventListener('click',e=>{
 });
 
 function openLightbox(product,index){
-  currentProduct=product;currentIndex=index;
+  currentProduct=product;
+  currentIndex=Number.isInteger(index)?index:defaultMediaIndex(product);
   lightbox.classList.add('active');
   document.body.style.overflow='hidden';
   updateLightbox();
@@ -381,17 +430,37 @@ function openLightbox(product,index){
 function closeLightbox(){
   lightbox.classList.remove('active');
   document.body.style.overflow='';
+  lbVideo.pause();
+  lbVideo.removeAttribute('src');
+  lbVideo.load();
 }
-function updateLightbox(){
-  lbImg.src=encodeURI(currentProduct.imgs[currentIndex]);
+function updateLightbox(options={}){
+  const media=getMedia(currentProduct);
+  const item=media[currentIndex];
+  if(item.type==='video'){
+    lbImg.style.display='none';
+    lbImg.removeAttribute('src');
+    lbVideo.style.display='block';
+    lbVideo.src=encodeURI(item.src);
+    if(options.playVideo)lbVideo.play().catch(()=>{});
+  }else{
+    lbVideo.pause();
+    lbVideo.removeAttribute('src');
+    lbVideo.load();
+    lbVideo.style.display='none';
+    lbImg.style.display='block';
+    lbImg.src=encodeURI(item.src);
+  }
   lbTitle.textContent=currentProduct.name+' - '+currentProduct.cat.toUpperCase();
-  lbCounter.textContent=(currentIndex+1)+' / '+currentProduct.imgs.length;
+  lbCounter.textContent=(currentIndex+1)+' / '+media.length;
   lbThumbs.innerHTML='';
-  currentProduct.imgs.forEach((img,i)=>{
+  media.forEach((thumb,i)=>{
     const d=document.createElement('div');
-    d.className='lb-thumb'+(i===currentIndex?' active':'');
-    d.innerHTML=`<img src="${encodeURI(img)}" alt="" loading="lazy">`;
-    d.addEventListener('click',()=>{currentIndex=i;updateLightbox()});
+    d.className='lb-thumb'+(i===currentIndex?' active':'')+(thumb.type==='video'?' video-thumb':'');
+    d.innerHTML=thumb.type==='video'
+      ?`<video src="${encodeURI(thumb.src)}" muted preload="metadata" playsinline></video><span class="video-play"></span>`
+      :`<img src="${encodeURI(thumb.src)}" alt="" loading="lazy">`;
+    d.addEventListener('click',()=>{currentIndex=i;updateLightbox({playVideo:thumb.type==='video'})});
     lbThumbs.appendChild(d);
   });
   const active=lbThumbs.querySelector('.active');
@@ -399,14 +468,14 @@ function updateLightbox(){
 }
 
 document.getElementById('lbClose').addEventListener('click',closeLightbox);
-document.getElementById('lbPrev').addEventListener('click',()=>{currentIndex=(currentIndex-1+currentProduct.imgs.length)%currentProduct.imgs.length;updateLightbox()});
-document.getElementById('lbNext').addEventListener('click',()=>{currentIndex=(currentIndex+1)%currentProduct.imgs.length;updateLightbox()});
+document.getElementById('lbPrev').addEventListener('click',()=>{const total=getMedia(currentProduct).length;currentIndex=(currentIndex-1+total)%total;updateLightbox()});
+document.getElementById('lbNext').addEventListener('click',()=>{const total=getMedia(currentProduct).length;currentIndex=(currentIndex+1)%total;updateLightbox()});
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
 document.addEventListener('keydown',e=>{
   if(!lightbox.classList.contains('active'))return;
   if(e.key==='Escape')closeLightbox();
-  if(e.key==='ArrowLeft'){currentIndex=(currentIndex-1+currentProduct.imgs.length)%currentProduct.imgs.length;updateLightbox()}
-  if(e.key==='ArrowRight'){currentIndex=(currentIndex+1)%currentProduct.imgs.length;updateLightbox()}
+  if(e.key==='ArrowLeft'){const total=getMedia(currentProduct).length;currentIndex=(currentIndex-1+total)%total;updateLightbox()}
+  if(e.key==='ArrowRight'){const total=getMedia(currentProduct).length;currentIndex=(currentIndex+1)%total;updateLightbox()}
 });
 
 // Nav
